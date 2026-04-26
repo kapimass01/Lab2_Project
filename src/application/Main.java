@@ -3,18 +3,33 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.GridPane;
+
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			//creating the genre scene
+			GenreScene genreScene = new GenreScene();
+			GridPane genresView =genreScene.getView();
+			
+			//the tab and TabePane
+			Tab genreTab = new Tab("Genres");
+			genreTab.setContent(genresView);
+			
+			TabPane tabPane = new TabPane();
+			tabPane.getTabs().add(genreTab);
+			
+			Scene scene = new Scene(tabPane);
+			primaryStage.setTitle("Movie Library System");
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
